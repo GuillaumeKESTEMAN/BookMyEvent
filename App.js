@@ -24,11 +24,25 @@ export default function App() {
 		<PaperProvider>
 			<AppContextProvider>
 				<NavigationContainer>
-					<Tab.Navigator initialRouteName="signup">
+					<Tab.Navigator
+						initialRouteName="signin"
+						screenOptions={{
+							headerShown: false,
+						}}
+					>
 						{user ? (
 							<></>
 						) : (
-							<Stack.Screen name="signup" component={SignUp} />
+							<>
+								<Stack.Screen
+									name="signin"
+									component={SignIn}
+								/>
+								<Stack.Screen
+									name="signup"
+									component={SignUp}
+								/>
+							</>
 						)}
 					</Tab.Navigator>
 				</NavigationContainer>
