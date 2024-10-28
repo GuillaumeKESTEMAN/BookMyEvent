@@ -2,20 +2,18 @@ import { Card, IconButton } from "react-native-paper";
 import { View, Text } from "react-native";
 import { styles } from "./EventClickCard.styles"
 
-function handlePress() {}
-
-export const EventClickCard = ({ params }) => (
-    <Card style={styles.card} onPress={handlePress}>
+export const EventClickCard = ({ title, place, date, image, onClick }) => (
+    <Card style={styles.card} onPress={onClick}>
         <Card.Title
             style={styles.title}
-            title={params.title}
+            title={title}
             titleVariant="titleLarge"
-            subtitle={<View style={styles.subtitle}>
-                <Text>{params.place}</Text>
-                <Text>|</Text>
-                <Text>{params.date}</Text>
-            </View>}
-            left={() => <Card.Cover source={{ uri: params.image }} style={styles.image} />}
+            subtitle={
+                <View style={styles.subtitle}>
+                    <Text>{place} | {date}</Text>
+                </View>
+            }
+            left={() => <Card.Cover source={{ uri: image }} style={styles.image} />}
             right={() => <IconButton
                 icon="chevron-right"
                 size={40}
