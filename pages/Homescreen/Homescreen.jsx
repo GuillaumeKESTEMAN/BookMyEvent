@@ -1,25 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { styles } from "./Homescreen.styles"
+import { fetchEvents } from './Homescreen.helpers';
 import { EventClickCard } from '../../shared/components/EventClickCard/EventClickCard';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const Homescreen = () => {
     const [events, setEvents] = useState([]);
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const value = await AsyncStorage.getItem('data');
-                if (value != null) {
-                    const data = JSON.parse(value);
-                    setEvents(data.events);
-                }
-            } catch (e) {
-                Alert.alert("Erreur", "Une erreur s'est produite lors du chargement des données.");
-            }
-        };
-        fetchData();
+    
+    useEffect(() => { 
+        fetchEvents(setEvents);
     }, []);
 
     const handlePressCard = (id) => { }
