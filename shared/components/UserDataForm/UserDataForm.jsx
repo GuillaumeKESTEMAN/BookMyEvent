@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { View } from 'react-native';
 import { Button, Text, TextInput } from 'react-native-paper';
-import { getHashedPassword } from './UserDataForm.helpers';
+import { hash } from '../../helpers/hash';
 
 export const UserDataForm = ({
 	submitLabel,
@@ -76,7 +76,7 @@ export const UserDataForm = ({
 					};
 
 					if (!isHidingPassword) {
-						result.password = await getHashedPassword(password);
+						result.password = await hash(password);
 					}
 
 					await onSubmit(result);

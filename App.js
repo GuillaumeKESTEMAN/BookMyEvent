@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { AppRegistry } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
 import { name as appName } from './app.json';
+import { SignIn } from './screens/SignIn';
 import { SignUp } from './screens/SignUp';
 import { initializeData } from './services/AddInitialData';
 import { AppContextProvider, useAppContext } from './shared/context/AppContext';
@@ -24,13 +25,24 @@ export default function App() {
 		<PaperProvider>
 			<AppContextProvider>
 				<NavigationContainer>
-					<Tab.Navigator initialRouteName="signup">
-						{user ? (
-							<></>
-						) : (
-							<Stack.Screen name="signup" component={SignUp} />
-						)}
-					</Tab.Navigator>
+					{user ? (
+						<Tab.Navigator
+							initialRouteName="home"
+							screenOptions={{
+								headerShown: false,
+							}}
+						></Tab.Navigator>
+					) : (
+						<Stack.Navigator
+							initialRouteName="sign-in"
+							screenOptions={{
+								headerShown: false,
+							}}
+						>
+							<Stack.Screen name="sign-in" component={SignIn} />
+							<Stack.Screen name="sign-up" component={SignUp} />
+						</Stack.Navigator>
+					)}
 				</NavigationContainer>
 			</AppContextProvider>
 		</PaperProvider>
