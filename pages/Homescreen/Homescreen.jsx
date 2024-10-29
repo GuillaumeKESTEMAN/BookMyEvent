@@ -1,21 +1,28 @@
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Alert, View, Text, FlatList, TouchableOpacity } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { styles } from "./Homescreen.styles"
 import { EventClickCard } from '../../shared/components/EventClickCard/EventClickCard';
-
-const events = [
-    { id: '1', title: 'Évènement 1', location: 'Paris', date: '01-11-2024', image: 'https://picsum.photos/400' },
-    { id: '2', title: 'Évènement 2', location: 'Lille', date: '15-12-2024', image: 'https://picsum.photos/400' },
-    { id: '3', title: 'Évènement 3', location: 'Marseille', date: '10-01-2025', image: 'https://picsum.photos/400' },
-    { id: '4', title: 'Évènement 4', location: 'Bordeaux', date: '15-02-2025', image: 'https://picsum.photos/400' },
-    { id: '5', title: 'Évènement 5', location: 'Lyon', date: '08-03-2025', image: 'https://picsum.photos/400' },
-    { id: '6', title: 'Évènement 6', location: 'Nice', date: '17-04-2025', image: 'https://picsum.photos/400' },
-    { id: '7', title: 'Évènement 7', location: 'Toulouse', date: '2-05-2025', image: 'https://picsum.photos/400' },
-    { id: '8', title: 'Évènement 8', location: 'Strasbourg', date: '9-05-2025', image: 'https://picsum.photos/400' },
-];
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const Homescreen = () => {
-    const handlePressCard = (id) => {}
+    const [events, setEvents] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const value = await AsyncStorage.getItem('data');
+                if (value != null) {
+                    const data = JSON.parse(value);
+                    setEvents(data.events);
+                }
+            } catch (e) {
+                Alert.alert("Erreur", "Une erreur s'est produite lors du chargement des données.");
+            }
+        };
+        fetchData();
+    }, []);
+
+    const handlePressCard = (id) => { }
 
     return (
         <View style={styles.container}>
@@ -36,15 +43,22 @@ export const Homescreen = () => {
                 </TouchableOpacity>
             </View>
             <Text style={styles.category}>Évènements</Text>
-            <FlatList
-                data={events}
-                renderItem={({ item }) => (
-                    <View style={styles.item}>
-                        <EventClickCard title={item.title} location={item.location} date={item.date} image={item.image} pressAction={() => handlePressCard(item.id)} />
-                    </View>
-                )}
-                keyExtractor={item => item.id}
-            />
+            {events.length === 0 ?
+                (<Text style={styles.noEvents}>Aucun évènement disponible pour le moment.</Text>) :
+                (<FlatList
+                    data={events}
+                    renderItem={
+                        ({ item }) => (
+                            <View style={styles.item}>
+                                <EventClickCard
+                                    title={item.title}
+                                    location={item.location}
+                                    date={item.date}
+                                    image={item.image}
+                                    pressAction={() => handlePressCard(item.id)} />
+                            </View>)
+                    }
+                    keyExtractor={item => item.id} />)}
         </View>
     );
 }
