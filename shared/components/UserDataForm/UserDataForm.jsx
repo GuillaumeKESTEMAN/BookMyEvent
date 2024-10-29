@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { View } from 'react-native';
 import { Button, Text, TextInput } from 'react-native-paper';
 import { hash } from '../../helpers/hash';
+import { styles } from './UserDataForm.styles';
 
 export const UserDataForm = ({
 	submitLabel,
@@ -20,26 +21,18 @@ export const UserDataForm = ({
 		}
 	}, [error, setError]);
 
-	const resetValues = useCallback(() => {
-		setName('');
-		setBio('');
-		setPassword('');
-		setError(undefined);
-	}, [setName, setBio, setPassword, setError]);
-
 	return (
-		<View>
+		<View style={styles.container}>
 			<TextInput
-				mode="outlined"
 				label="Name"
 				value={name}
 				onChangeText={(newName) => {
 					setName(newName);
 					onTextChange();
 				}}
+				style={styles.textInput}
 			/>
 			<TextInput
-				mode="outlined"
 				label="Biography"
 				multiline
 				numberOfLines={4}
@@ -48,10 +41,10 @@ export const UserDataForm = ({
 					setBio(newBiography);
 					onTextChange();
 				}}
+				style={styles.textInput}
 			/>
 			{!isHidingPassword && (
 				<TextInput
-					mode="outlined"
 					label="Password"
 					secureTextEntry
 					value={password}
@@ -59,11 +52,15 @@ export const UserDataForm = ({
 						setPassword(newPassword);
 						onTextChange();
 					}}
+					style={styles.textInput}
 				/>
 			)}
-			<Text>{error}</Text>
+			{Boolean(error) && <Text style={styles.error}>{error}</Text>}
 			<Button
-				mode="outlined"
+				mode="contained"
+				buttonColor="#DF621E"
+				textColor="#000000"
+				style={styles.button}
 				onPress={async () => {
 					if (!name || !bio || !password) {
 						setError('All fields are required');

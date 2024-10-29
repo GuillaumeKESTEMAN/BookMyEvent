@@ -4,13 +4,7 @@ export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: '#2D2A2A',
-		justifyContent: 'center',
 		padding: 16,
-	},
-	img: {
-		width: 200,
-		height: 200,
-		alignSelf: 'center',
 	},
 	title: {
 		color: '#FFFFFF',
@@ -18,11 +12,10 @@ export const styles = StyleSheet.create({
 		textAlign: 'center',
 		marginBottom: 24,
 	},
-	inputsContainer: {
-		gap: 16,
-	},
-	textInput: {
-		borderRadius: 5,
+	img: {
+		width: 200,
+		height: 200,
+		alignSelf: 'center',
 	},
 	button: {
 		marginTop: 16,
@@ -30,8 +23,6 @@ export const styles = StyleSheet.create({
 		marginStart: 50,
 		height: 50,
 		justifyContent: 'center',
-	},
-	signUpButton: {
 		borderColor: '#DF621E',
 	},
 });
