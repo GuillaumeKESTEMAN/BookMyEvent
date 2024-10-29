@@ -15,14 +15,16 @@ const events = [
 ];
 
 export const Homescreen = () => {
-    const handlePressCard = (title) => { }
+    const handlePressCard = (id) => {}
 
     return (
         <View style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.title}>
-                    {`Bienvenue sur notre appli de réservation.\nNe manque aucun évènement en t'inscrivant dès maintenant !\n\nTu veux inscrire le tiens ?`}
+                    Bienvenue sur notre appli de réservation.
+                    Ne manque aucun évènement en t'inscrivant dès maintenant !
                 </Text>
+                <Text style={styles.subtitle} >Tu veux inscrire le tiens ?</Text>
             </View>
             <View style={styles.addButtonContainer}>
                 <TouchableOpacity style={styles.addButton} onPress={() => { }}>
@@ -38,7 +40,7 @@ export const Homescreen = () => {
                 data={events}
                 renderItem={({ item }) => (
                     <View style={styles.item}>
-                        <EventClickCard title={item.title} location={item.location} date={item.date} image={item.image} pressAction={() => handlePressCard(item.title)} />
+                        <EventClickCard title={item.title} location={item.location} date={item.date} image={item.image} pressAction={() => handlePressCard(item.id)} />
                     </View>
                 )}
                 keyExtractor={item => item.id}

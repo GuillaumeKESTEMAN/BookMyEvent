@@ -15,7 +15,11 @@ export const styles = StyleSheet.create({
     },
     title: {
         fontSize: 16,
-        textAlign: 'center'
+        textAlign: 'center',
+        paddingBottom: 5
+    },
+    subtitle: {
+        fontSize: 16,
     },
     addButtonContainer: {
         marginVertical: 10,
