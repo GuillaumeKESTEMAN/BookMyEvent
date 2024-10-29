@@ -1,0 +1,54 @@
+{
+  "users": [
+    {
+      "id": "337a1254-c51c-455b-8898-37ea2e03d245",
+      "username": "jeanclaude",
+      "password": "838b3abf49036ad2443f3fe78c6120f816fdf057be2a559d6ee379744de695c6",
+      "bio": "I am the original user of this App",
+      "createdEvents": [
+        "12c17260-0b08-4e0a-8ba3-30f0abf7229c"
+      ],
+      "joinedEvents": [
+        "c13d8cb4-29fc-46cd-93f7-a06ef5e20a05"
+      ]
+    },
+    {
+      "id": "40a76c03-8f14-425a-993e-971febf33779",
+      "username": "johndoe",
+      "password": "c2713b62c903791bdefc5a6a99df04d4330de491bbc7a0ca6a5007337e4a6028",
+      "bio": "I am a new user of this App",
+      "createdEvents": [
+        "c13d8cb4-29fc-46cd-93f7-a06ef5e20a05"
+      ],
+      "joinedEvents": [
+        "12c17260-0b08-4e0a-8ba3-30f0abf7229c"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "12c17260-0b08-4e0a-8ba3-30f0abf7229c",
+      "title": "The Big Event",
+      "image": "https://www.example.com/image.jpg",
+      "description": "This is the biggest event of the year",
+      "date": "2024-12-31",
+      "location": "New York",
+      "creator": "337a1254-c51c-455b-8898-37ea2e03d245",
+      "participants": [
+        "40a76c03-8f14-425a-993e-971febf33779"
+      ]
+    },
+    {
+      "id": "c13d8cb4-29fc-46cd-93f7-a06ef5e20a05",
+      "title": "The Small Event",
+      "image": "https://www.example.com/image.jpg",
+      "description": "This is the smallest event of the year",
+      "date": "2024-12-31",
+      "location": "Los Angeles",
+      "creator": "40a76c03-8f14-425a-993e-971febf33779",
+      "participants": [
+        "337a1254-c51c-455b-8898-37ea2e03d245"
+      ]
+    }
+  ]
+}
