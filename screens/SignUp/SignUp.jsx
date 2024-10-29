@@ -2,14 +2,18 @@ import React, { useState } from 'react';
 import { UserDataForm } from '../../shared/components/UserDataForm';
 import { useAppContext } from '../../shared/context/AppContext';
 
-export const SignUp = () => {
+export const SignUp = ({ navigation }) => {
 	const { createUser } = useAppContext();
 	const [error, setError] = useState(undefined);
 
 	const onSubmit = async (newUser) => {
 		const userCreationError = await createUser(newUser);
-		setError(userCreationError);
-		return !userCreationError;
+
+		if (userCreationError) {
+			setError(userCreationError);
+		} else {
+			navigation.navigate('home');
+		}
 	};
 
 	return (
