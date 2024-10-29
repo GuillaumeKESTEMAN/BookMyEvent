@@ -53,3 +53,18 @@ export const loginHelper = async (userName, password, setUser) => {
 		return 'An error occurred while signing in.';
 	}
 };
+
+export const deleteAccountHelper = async (user, setUser) => {
+	try {
+		const storedUsers = await AsyncStorage.getItem('users');
+		const users = storedUsers ? JSON.parse(storedUsers) : [];
+
+		const updatedUsers = users.filter((storedUser) => storedUser.id !== user.id);
+
+		await AsyncStorage.setItem('users', JSON.stringify(updatedUsers));
+
+		setUser(null);
+	} catch (error) {
+		return 'An error occurred while deleting the account.';
+	}
+}

@@ -9,6 +9,7 @@ import { SignIn } from './screens/SignIn';
 import { SignUp } from './screens/SignUp';
 import { initializeData } from './services/AddInitialData';
 import { AppContextProvider, useAppContext } from './shared/context/AppContext';
+import { UserScreen } from './pages/UserScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -31,7 +32,9 @@ export default function App() {
 							screenOptions={{
 								headerShown: false,
 							}}
-						></Tab.Navigator>
+						>
+							<Tab.Screen name="UserScreen" component={UserScreen} />
+						</Tab.Navigator>
 					) : (
 						<Stack.Navigator
 							initialRouteName="sign-in"
