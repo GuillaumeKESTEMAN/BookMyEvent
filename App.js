@@ -4,6 +4,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { name as appName } from './app.json';
+import { initializeData } from './services/AddInitialData';
+import { useEffect } from 'react';
 
 import SignIn from './pages/SignIn';
 
@@ -12,6 +14,10 @@ const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+	useEffect(() => {
+		initializeData();
+	}, []);
+
 	return (
 		<PaperProvider>
 			<NavigationContainer>
