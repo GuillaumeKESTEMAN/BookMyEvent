@@ -7,10 +7,10 @@ import { EventClickCard } from '../../shared/components/EventClickCard/EventClic
 
 export const Homescreen = () => {
     const [events, setEvents] = useState([]);
-    
+
     useEffect(() => { 
         fetchEvents(setEvents);
-    }, []);
+    }, [setEvents]);
 
     const handlePressCard = (id) => { }
 
