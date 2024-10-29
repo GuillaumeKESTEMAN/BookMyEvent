@@ -29,7 +29,7 @@
     {
       "id": "12c17260-0b08-4e0a-8ba3-30f0abf7229c",
       "title": "The Big Event",
-      "image": "https://www.example.com/image.jpg",
+      "image": "https://picsum.photos/400",
       "description": "This is the biggest event of the year",
       "date": "2024-12-31",
       "location": "New York",
@@ -41,7 +41,7 @@
     {
       "id": "c13d8cb4-29fc-46cd-93f7-a06ef5e20a05",
       "title": "The Small Event",
-      "image": "https://www.example.com/image.jpg",
+      "image": "https://picsum.photos/400",
       "description": "This is the smallest event of the year",
       "date": "2024-12-31",
       "location": "Los Angeles",
