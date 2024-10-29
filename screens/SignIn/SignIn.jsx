@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { Alert, Image, View } from 'react-native';
+import {
+	Alert,
+	Image,
+	Keyboard,
+	TouchableWithoutFeedback,
+	View,
+} from 'react-native';
 import { Button, Text, TextInput } from 'react-native-paper';
 import { useAppContext } from '../../shared/context/AppContext';
 import { styles } from './SignIn.styles';
@@ -25,50 +31,51 @@ export const SignIn = ({ navigation }) => {
 	};
 
 	return (
-		<View style={styles.container}>
-			<Image
-				source={require('../../assets/logo.png')}
-				style={styles.img}
-			/>
+		<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+			<View style={styles.container}>
+				<Image
+					source={require('../../assets/logo.png')}
+					style={styles.img}
+				/>
 
-			<Text variant="displaySmall" style={styles.title}>
-				BookMyEvent
-			</Text>
+				<Text variant="displaySmall" style={styles.title}>
+					BookMyEvent
+				</Text>
 
-			<TextInput
-				style={styles.textInput}
-				label="Username"
-				value={username}
-				onChangeText={setUsername}
-			/>
+				<View style={styles.inputsContainer}>
+					<TextInput
+						style={styles.textInput}
+						label="Username"
+						value={username}
+						onChangeText={setUsername}
+					/>
+					<TextInput
+						style={styles.textInput}
+						label="Password"
+						value={password}
+						onChangeText={setPassword}
+						secureTextEntry
+					/>
+					<Button
+						mode="contained"
+						buttonColor="#DF621E"
+						textColor="#000000"
+						style={styles.button}
+						onPress={handleSignIn}
+					>
+						Sign In
+					</Button>
+				</View>
 
-			<TextInput
-				style={styles.textInput}
-				label="Password"
-				value={password}
-				onChangeText={setPassword}
-				secureTextEntry
-			/>
-
-			<Button
-				mode="contained"
-				buttonColor="#DF621E"
-				textColor="#000000"
-				style={styles.button}
-				onPress={handleSignIn}
-			>
-				Sign In
-			</Button>
-
-			<Button
-				mode="contained"
-				buttonColor="#DF621E"
-				textColor="#000000"
-				style={styles.button}
-				onPress={() => navigation.navigate('sign-up')}
-			>
-				Sign Up
-			</Button>
-		</View>
+				<Button
+					mode="outlined"
+					textColor="#DF621E"
+					style={{ ...styles.button, ...styles.signUpButton }}
+					onPress={() => navigation.navigate('sign-up')}
+				>
+					Sign Up
+				</Button>
+			</View>
+		</TouchableWithoutFeedback>
 	);
 };
