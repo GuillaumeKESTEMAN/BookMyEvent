@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import { getHashedPassword } from './UserDataForm.helpers';
+import { styles } from './UserDataForm.styles';
 
 export const UserDataForm = ({
 	submitLabel,
@@ -15,12 +16,14 @@ export const UserDataForm = ({
 	return (
 		<View>
 			<TextInput
+				style={styles.input}
 				mode="outlined"
 				label="Name"
 				value={name}
 				onChangeText={setName}
 			/>
 			<TextInput
+				style={styles.input}
 				mode="outlined"
 				label="Biography"
 				multiline
@@ -30,6 +33,7 @@ export const UserDataForm = ({
 			/>
 			{!isHidingPassword && (
 				<TextInput
+					style={styles.input}
 					mode="outlined"
 					label="Password"
 					secureTextEntry
@@ -38,7 +42,10 @@ export const UserDataForm = ({
 				/>
 			)}
 			<Button
+				style={styles.button}
 				mode="outlined"
+				textColor='#000000'
+				buttonColor='#DF621E'
 				onPress={async () => {
 					const result = {
 						name,
