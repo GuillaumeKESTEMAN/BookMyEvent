@@ -28,7 +28,7 @@ export function User({ navigation }) {
 					textColor="#000000"
 					style={styles.button}
 					onPress={() => {
-						navigation.navigate('UpdateUserInfo');
+						navigation.navigate('UserUpdateForm');
 					}}
 				>
 					Update Info

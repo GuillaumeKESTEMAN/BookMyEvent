@@ -6,13 +6,15 @@ import { styles } from './UserDataForm.styles';
 
 export const UserDataForm = ({
 	submitLabel,
-	isHidingPassword = false,
 	onSubmit,
 	error,
 	setError,
+	isPasswordRequired = true,
+	defaultName = '',
+	defaultBio = '',
 }) => {
-	const [name, setName] = useState('');
-	const [bio, setBio] = useState('');
+	const [name, setName] = useState(defaultName);
+	const [bio, setBio] = useState(defaultBio);
 	const [password, setPassword] = useState('');
 
 	const onTextChange = useCallback(() => {
@@ -22,7 +24,7 @@ export const UserDataForm = ({
 	}, [error, setError]);
 
 	const handleSubmit = useCallback(async () => {
-		if (!name || !bio || !password) {
+		if (!name || !bio || (isPasswordRequired && !password)) {
 			setError('All fields are required');
 			return;
 		}
@@ -30,14 +32,11 @@ export const UserDataForm = ({
 		const result = {
 			name,
 			bio,
+			password: await hash(password),
 		};
 
-		if (!isHidingPassword) {
-			result.password = await hash(password);
-		}
-
 		await onSubmit(result);
-	}, [setError, name, bio, password, isHidingPassword, onSubmit]);
+	}, [setError, name, bio, password, onSubmit]);
 
 	return (
 		<View style={styles.container}>
@@ -61,19 +60,17 @@ export const UserDataForm = ({
 				}}
 				style={styles.textInput}
 			/>
-			{!isHidingPassword && (
-				<TextInput
-					label="Password"
-					secureTextEntry
-					value={password}
-					onChangeText={(newPassword) => {
-						setPassword(newPassword);
-						onTextChange();
-					}}
-					onSubmitEditing={handleSubmit}
-					style={styles.textInput}
-				/>
-			)}
+			<TextInput
+				label="Password"
+				secureTextEntry
+				value={password}
+				onChangeText={(newPassword) => {
+					setPassword(newPassword);
+					onTextChange();
+				}}
+				onSubmitEditing={handleSubmit}
+				style={styles.textInput}
+			/>
 			{Boolean(error) && <Text style={styles.error}>{error}</Text>}
 			<Button
 				mode="contained"

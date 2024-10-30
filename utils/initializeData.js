@@ -18,3 +18,4 @@ const initializeData = async () => {
 };
 
 export { initializeData };
+
