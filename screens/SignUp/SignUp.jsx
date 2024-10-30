@@ -6,6 +6,7 @@ import {
 	TouchableWithoutFeedback,
 } from 'react-native';
 import { Button, Text } from 'react-native-paper';
+import { ScreenView } from '../../shared/components/ScreenView/ScreenView';
 import { UserDataForm } from '../../shared/components/UserDataForm';
 import { useAppContext } from '../../shared/context/AppContext';
 import { styles } from './SignUp.styles';
@@ -24,7 +25,7 @@ export const SignUp = ({ navigation }) => {
 
 	return (
 		<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-			<ScrollView style={styles.container}>
+			<ScreenView parent={ScrollView}>
 				<Image
 					source={require('../../assets/logo.png')}
 					style={styles.img}
@@ -46,7 +47,7 @@ export const SignUp = ({ navigation }) => {
 				>
 					Sign In
 				</Button>
-			</ScrollView>
+			</ScreenView>
 		</TouchableWithoutFeedback>
 	);
 };

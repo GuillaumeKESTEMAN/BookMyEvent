@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { EventClickCard } from '../../shared/components/EventClickCard/EventClickCard';
+import { ScreenView } from '../../shared/components/ScreenView';
 import { fetchEvents } from './Home.helpers';
 import { styles } from './Home.styles';
 
@@ -15,7 +16,7 @@ export const Home = () => {
 	const handlePressCard = (id) => {};
 
 	return (
-		<View style={styles.container}>
+		<ScreenView style={styles.container}>
 			<View style={styles.header}>
 				<Text style={styles.title}>
 					Bienvenue sur notre appli de réservation. Ne manque aucun
@@ -53,6 +54,6 @@ export const Home = () => {
 					keyExtractor={(item) => item.id}
 				/>
 			)}
-		</View>
+		</ScreenView>
 	);
 };

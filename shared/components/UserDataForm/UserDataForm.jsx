@@ -21,6 +21,24 @@ export const UserDataForm = ({
 		}
 	}, [error, setError]);
 
+	const handleSubmit = useCallback(async () => {
+		if (!name || !bio || !password) {
+			setError('All fields are required');
+			return;
+		}
+
+		const result = {
+			name,
+			bio,
+		};
+
+		if (!isHidingPassword) {
+			result.password = await hash(password);
+		}
+
+		await onSubmit(result);
+	}, [setError, name, bio, password, isHidingPassword, onSubmit]);
+
 	return (
 		<View style={styles.container}>
 			<TextInput
@@ -52,6 +70,7 @@ export const UserDataForm = ({
 						setPassword(newPassword);
 						onTextChange();
 					}}
+					onSubmitEditing={handleSubmit}
 					style={styles.textInput}
 				/>
 			)}
@@ -61,23 +80,7 @@ export const UserDataForm = ({
 				buttonColor="#DF621E"
 				textColor="#000000"
 				style={styles.button}
-				onPress={async () => {
-					if (!name || !bio || !password) {
-						setError('All fields are required');
-						return;
-					}
-
-					const result = {
-						name,
-						bio,
-					};
-
-					if (!isHidingPassword) {
-						result.password = await hash(password);
-					}
-
-					await onSubmit(result);
-				}}
+				onPress={handleSubmit}
 			>
 				{submitLabel}
 			</Button>

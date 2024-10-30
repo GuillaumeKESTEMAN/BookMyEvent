@@ -7,6 +7,7 @@ import {
 	View,
 } from 'react-native';
 import { Button, Text, TextInput } from 'react-native-paper';
+import { ScreenView } from '../../shared/components/ScreenView';
 import { useAppContext } from '../../shared/context/AppContext';
 import { styles } from './SignIn.styles';
 
@@ -30,7 +31,7 @@ export const SignIn = ({ navigation }) => {
 
 	return (
 		<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-			<View style={styles.container}>
+			<ScreenView>
 				<Image
 					source={require('../../assets/logo.png')}
 					style={styles.img}
@@ -52,6 +53,7 @@ export const SignIn = ({ navigation }) => {
 						label="Password"
 						value={password}
 						onChangeText={setPassword}
+						onSubmitEditing={handleSignIn}
 						secureTextEntry
 					/>
 					<Button
@@ -73,7 +75,7 @@ export const SignIn = ({ navigation }) => {
 				>
 					Sign Up
 				</Button>
-			</View>
+			</ScreenView>
 		</TouchableWithoutFeedback>
 	);
 };

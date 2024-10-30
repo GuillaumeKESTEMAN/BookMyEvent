@@ -1,5 +1,6 @@
 import { Text, View } from 'react-native';
 import { Button, Icon } from 'react-native-paper';
+import { ScreenView } from '../../shared/components/ScreenView';
 import { useAppContext } from '../../shared/context/AppContext';
 import { styles } from './User.styles';
 
@@ -7,7 +8,7 @@ export function User({ navigation }) {
 	const { user, logout, deleteAccount } = useAppContext();
 
 	return (
-		<View style={styles.container}>
+		<ScreenView>
 			<View style={styles.infoRow}>
 				<View style={styles.avatar}>
 					<Icon source="account" size={40} color="#000000" />
@@ -59,6 +60,6 @@ export function User({ navigation }) {
 					Delete Account
 				</Button>
 			</View>
-		</View>
+		</ScreenView>
 	);
 }

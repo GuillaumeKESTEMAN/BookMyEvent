@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { BottomNavigation } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Home } from '../../screens/Homescreen';
+import { Home } from '../../screens/Home';
 import { SignIn } from '../../screens/SignIn';
 import { SignUp } from '../../screens/SignUp';
 import { User } from '../../screens/User';
