@@ -53,6 +53,7 @@ export const SignIn = ({ navigation }) => {
 						label="Password"
 						value={password}
 						onChangeText={setPassword}
+						onSubmitEditing={handleSignIn}
 						secureTextEntry
 					/>
 					<Button
