@@ -24,8 +24,8 @@ export const createUserHelper = async (newUser, setUser) => {
 
 		delete newUser.password;
 
+		await SecureStore.setItemAsync('userToken', newUser.id);
 		setUser(newUser);
-		await SecureStore.setItemAsync('userToken', storedUser.id);
 	} catch (error) {
 		return 'An error occurred while signing up.';
 	}
@@ -65,8 +65,8 @@ export const loginHelper = async (userName, password, setUser) => {
 
 		delete storedUser.password;
 
-		setUser(storedUser);
 		await SecureStore.setItemAsync('userToken', storedUser.id);
+		setUser(storedUser);
 	} catch (error) {
 		return 'An error occurred while signing in.';
 	}
@@ -99,16 +99,16 @@ export const logoutHelper = async (setUser) => {
 
 export const deleteAccountHelper = async (user, setUser) => {
 	try {
-		const users = getUsers();
+		const users = await getUsers();
 
 		const updatedUsers = users.filter(
 			(storedUser) => storedUser.id !== user.id
 		);
 
 		await AsyncStorage.setItem('users', JSON.stringify(updatedUsers));
+		await SecureStore.deleteItemAsync('userToken');
 
 		setUser(null);
-		await SecureStore.deleteItemAsync('userToken');
 	} catch (error) {
 		return 'An error occurred while deleting the account.';
 	}
