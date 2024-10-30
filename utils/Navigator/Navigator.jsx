@@ -8,6 +8,7 @@ import { Home } from '../../screens/Home';
 import { SignIn } from '../../screens/SignIn';
 import { SignUp } from '../../screens/SignUp';
 import { UserNavigator } from '../../screens/User';
+import { UserEvents } from '../../screens/UserEvents';
 import { useAppContext } from '../../shared/context/AppContext';
 
 const Tab = createBottomTabNavigator();
@@ -78,6 +79,22 @@ export const Navigator = () => {
 						/>
 					)}
 				>
+					<Tab.Screen
+						name="UserEvents"
+						component={UserEvents}
+						options={{
+							tabBarLabel: 'My Events',
+							tabBarIcon: ({ color, size }) => {
+								return (
+									<Icon
+										name="account"
+										size={size}
+										color={color}
+									/>
+								);
+							},
+						}}
+					/>
 					<Tab.Screen
 						name="Home"
 						component={Home}
