@@ -13,7 +13,9 @@ const checkIfAsyncStorageIsEmpty = async () => {
 const initializeData = async () => {
   const isEmpty = await checkIfAsyncStorageIsEmpty();
   if (isEmpty) {
-    await AsyncStorage.setItem("data", JSON.stringify(initialData));
+    for (let key in initialData) {
+      await AsyncStorage.setItem(key, JSON.stringify(initialData[key]));
+    }
   }
 };
 
