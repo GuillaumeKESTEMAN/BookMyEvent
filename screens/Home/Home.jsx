@@ -6,14 +6,14 @@ import { ScreenView } from '../../shared/components/ScreenView';
 import { fetchEvents } from './Home.helpers';
 import { styles } from './Home.styles';
 
-export const Home = () => {
+export const Home = ({ navigation }) => {
 	const [events, setEvents] = useState([]);
 
 	useEffect(() => {
 		fetchEvents(setEvents);
 	}, [setEvents]);
 
-	const handlePressCard = (id) => {};
+	const handlePressCard = (event) => { navigation.navigate('event', { event }); };
 
 	return (
 		<ScreenView style={styles.container}>
@@ -47,7 +47,7 @@ export const Home = () => {
 								location={item.location}
 								date={item.date}
 								image={item.image}
-								pressAction={() => handlePressCard(item.id)}
+								pressAction={() => handlePressCard(item)}
 							/>
 						</View>
 					)}
