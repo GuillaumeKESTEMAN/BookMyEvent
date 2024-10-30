@@ -5,11 +5,12 @@ import { useEffect } from 'react';
 import { AppRegistry } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
 import { name as appName } from './app.json';
+import { Home } from './screens/Homescreen';
 import { SignIn } from './screens/SignIn';
 import { SignUp } from './screens/SignUp';
+import { User } from './screens/User';
 import { initializeData } from './services/AddInitialData';
 import { AppContextProvider, useAppContext } from './shared/context/AppContext';
-import { UserScreen } from './pages/UserScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -28,12 +29,13 @@ export default function App() {
 				<NavigationContainer>
 					{user ? (
 						<Tab.Navigator
-							initialRouteName="home"
+							initialRouteName="Home"
 							screenOptions={{
 								headerShown: false,
 							}}
 						>
-							<Tab.Screen name="UserScreen" component={UserScreen} />
+							<Tab.Screen name="Home" component={Home} />
+							<Tab.Screen name="User" component={User} />
 						</Tab.Navigator>
 					) : (
 						<Stack.Navigator
