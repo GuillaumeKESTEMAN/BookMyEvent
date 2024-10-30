@@ -25,8 +25,6 @@ export const SignIn = ({ navigation }) => {
 
 		if (loginError) {
 			Alert.alert('Error', loginError);
-		} else {
-			navigation.navigate('home');
 		}
 	};
 
@@ -71,7 +69,7 @@ export const SignIn = ({ navigation }) => {
 					mode="outlined"
 					textColor="#DF621E"
 					style={{ ...styles.button, ...styles.signUpButton }}
-					onPress={() => navigation.navigate('sign-up')}
+					onPress={() => navigation.navigate('SignUp')}
 				>
 					Sign Up
 				</Button>
