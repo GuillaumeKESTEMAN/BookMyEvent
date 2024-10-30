@@ -2,7 +2,9 @@ import React, { createContext, useCallback, useContext, useState } from 'react';
 import {
 	createUserHelper,
 	deleteAccountHelper,
+	loginFromCacheHelper,
 	loginHelper,
+	logoutHelper,
 	updateUserHelper,
 } from './helpers/User.helpers';
 
@@ -30,15 +32,19 @@ export const AppContextProvider = ({ children }) => {
 		[setUser]
 	);
 
-	const logout = useCallback(() => {
-		setUser(null);
-	}, [setUser]);
+	const loginFromCache = useCallback(
+		async () => loginFromCacheHelper(setUser),
+		[setUser]
+	);
+
+	const logout = useCallback(() => logoutHelper(setUser), [setUser]);
 
 	return (
 		<AppContext.Provider
 			value={{
 				user,
 				login,
+				loginFromCache,
 				logout,
 				createUser,
 				updateUser,

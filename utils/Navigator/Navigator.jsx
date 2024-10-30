@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CommonActions, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BottomNavigation } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Home } from '../../screens/Home';
@@ -15,7 +15,11 @@ const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 export const Navigator = () => {
-	const { user } = useAppContext();
+	const { user, loginFromCache } = useAppContext();
+
+	useEffect(() => {
+		loginFromCache();
+	}, []);
 
 	return (
 		<NavigationContainer>
