@@ -10,9 +10,9 @@ const getFilteredEvents = async (requiredLength, userId, filterFn) => {
 };
 
 export const getUserCreatedPaginatedEventsHelper = (requiredLength, userId) => {
-    return getFilteredEvents(requiredLength, userId, event => event.creator === userId);
+    return getFilteredEvents(requiredLength, userId, (event) => event.creator === userId);
 };
 
 export const getUserSubscribedPaginatedEventsHelper = (requiredLength, userId) => {
-    return getFilteredEvents(requiredLength, userId, event => event.participants.includes(userId));
+    return getFilteredEvents(requiredLength, userId, (event) => event.participants.includes(userId));
 };
