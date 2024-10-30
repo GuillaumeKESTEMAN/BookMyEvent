@@ -1,22 +1,18 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getEvents } from "../../utils/getEvents";
+import { fetchEvents } from "../../utils/getEvents";
 
-export const getUserCreatedPaginatedEventsHelper = async (requiredLength, userId) => {
-  try {
-    const events = getEvents();
-    const filteredEvents = events.filter((event) => event.creator === userId);
+const getFilteredEvents = async (requiredLength, userId, filterFn) => {
+    const events = await fetchEvents();
+    if (!events || events.length === 0) {
+        return [[], 0];
+    }
+    const filteredEvents = events.filter(filterFn);
     return [filteredEvents.slice(0, requiredLength), filteredEvents.length];
-  } catch (error) {
-    return "An error occurred while getting events.";
-  }
-}
+};
 
-export const getUserSubscribedPaginatedEventsHelper = async (requiredLength, userId) => {
-  try {
-    const events = getEvents();
-    const filteredEvents = events.filter((event) => event.participants.includes(userId));
-    return [filteredEvents.slice(0, requiredLength), filteredEvents.length];
-  } catch (error) {
-    return "An error occurred while getting events.";
-  }
-}
+export const getUserCreatedPaginatedEventsHelper = (requiredLength, userId) => {
+    return getFilteredEvents(requiredLength, userId, event => event.creator === userId);
+};
+
+export const getUserSubscribedPaginatedEventsHelper = (requiredLength, userId) => {
+    return getFilteredEvents(requiredLength, userId, event => event.participants.includes(userId));
+};
