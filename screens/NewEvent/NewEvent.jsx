@@ -30,13 +30,13 @@ export const NewEvent = ({ navigation }) => {
 
         const datePattern = /^\d{4}-\d{2}-\d{2}$/;
         if (!datePattern.test(date)) {
-            setError('La date doit être au format YYYY-MM-DD');
+            setError('Date must be in the format YYYY-MM-DD');
             return;
         }
 
         const urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
         if (image && !urlPattern.test(image)) {
-            setError("L'URL de l'image n'est pas valide");
+            setError('Image URL is invalid');
             return;
         }
 
@@ -60,69 +60,69 @@ export const NewEvent = ({ navigation }) => {
 
             navigation.navigate('Home', { message: 'Event created successfully!' });
         } catch (e) {
-            Alert.alert('Error', "An error occurred while creating the event.");
+            Alert.alert('Error', 'An error occurred while creating the event.');
         }
     }, [title, description, date, location, image, user.id, setError, navigation]);
 
     return (
         <ScreenView>
-            <Text variant="titleLarge" style={styles.title}>Create an event</Text>
+            <Text variant='titleLarge' style={styles.title}>Create an event</Text>
             <TextInput
-                label="Title"
+                label='Title'
                 value={title}
                 onChangeText={(newTitle) => {
                     setTitle(newTitle);
                     onTextChange();
                 }}
                 style={styles.input}
-                mode="outlined"
+                mode='outlined'
             />
             <TextInput
-                label="Description"
+                label='Description'
                 value={description}
                 onChangeText={(newDescription) => {
                     setDescription(newDescription);
                     onTextChange();
                 }}
                 style={styles.input}
-                mode="outlined"
+                mode='outlined'
                 multiline
             />
             <TextInput
-                label="Date (YYYY-MM-DD)"
+                label='Date (YYYY-MM-DD)'
                 value={date}
                 onChangeText={(newDate) => {
                     setDate(newDate);
                     onTextChange();
                 }}
                 style={styles.input}
-                mode="outlined"
+                mode='outlined'
             />
             <TextInput
-                label="Location"
+                label='Location'
                 value={location}
                 onChangeText={(newLocation) => {
                     setLocation(newLocation);
                     onTextChange();
                 }}
                 style={styles.input}
-                mode="outlined"
+                mode='outlined'
             />
             <TextInput
-                label="Image URL"
+                label='Image URL'
                 value={image}
                 onChangeText={(newImage) => {
                     setImage(newImage);
                     onTextChange();
                 }}
                 style={styles.input}
-                mode="outlined"
+                mode='outlined'
             />
             {Boolean(error) && <Text style={styles.error}>{error}</Text>}
             <Button
-                mode="contained"
-                buttonColor="#DF621E"
-                textColor="#FFF"
+                mode='contained'
+                buttonColor='#DF621E'
+                textColor='#FFF'
                 onPress={handleCreateEvent}
                 style={styles.button}
             >
