@@ -1,11 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import uuid from 'react-native-uuid';
+import { getUsers } from '../../../utils/getUsers';
 import { hash } from '../../helpers/hash';
 
 export const createUserHelper = async (newUser, setUser) => {
 	try {
-		const currentUsersList = await AsyncStorage.getItem('users');
-		const users = currentUsersList ? JSON.parse(currentUsersList) : [];
+		const users = await getUsers();
 		newUser.name = newUser.name.trim();
 
 		if (
@@ -31,8 +31,7 @@ export const createUserHelper = async (newUser, setUser) => {
 
 export const loginHelper = async (userName, password, setUser) => {
 	try {
-		const storedUsers = await AsyncStorage.getItem('users');
-		const users = storedUsers ? JSON.parse(storedUsers) : [];
+		const users = getUsers();
 
 		const hashedPassword = await hash(password);
 
@@ -56,10 +55,11 @@ export const loginHelper = async (userName, password, setUser) => {
 
 export const deleteAccountHelper = async (user, setUser) => {
 	try {
-		const storedUsers = await AsyncStorage.getItem('users');
-		const users = storedUsers ? JSON.parse(storedUsers) : [];
+		const users = getUsers();
 
-		const updatedUsers = users.filter((storedUser) => storedUser.id !== user.id);
+		const updatedUsers = users.filter(
+			(storedUser) => storedUser.id !== user.id
+		);
 
 		await AsyncStorage.setItem('users', JSON.stringify(updatedUsers));
 
@@ -67,4 +67,4 @@ export const deleteAccountHelper = async (user, setUser) => {
 	} catch (error) {
 		return 'An error occurred while deleting the account.';
 	}
-}
+};
