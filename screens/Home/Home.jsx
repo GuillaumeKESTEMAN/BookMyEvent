@@ -13,7 +13,7 @@ export const Home = ({ navigation }) => {
 		fetchEvents(setEvents);
 	}, [setEvents]);
 
-	const handlePressCard = (event) => { navigation.navigate('event', { event }); };
+	const handlePressCard = (event) => { navigation.navigate('Event', { event }); };
 
 	return (
 		<ScreenView style={styles.container}>
