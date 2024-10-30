@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SecureStore from 'expo-secure-store';
 import uuid from 'react-native-uuid';
 import { getUsers } from '../../../utils/getUsers';
 import { hash } from '../../helpers/hash';
@@ -24,6 +25,7 @@ export const createUserHelper = async (newUser, setUser) => {
 		delete newUser.password;
 
 		setUser(newUser);
+		await SecureStore.setItemAsync('userToken', storedUser.id);
 	} catch (error) {
 		return 'An error occurred while signing up.';
 	}
@@ -64,9 +66,35 @@ export const loginHelper = async (userName, password, setUser) => {
 		delete storedUser.password;
 
 		setUser(storedUser);
+		await SecureStore.setItemAsync('userToken', storedUser.id);
 	} catch (error) {
 		return 'An error occurred while signing in.';
 	}
+};
+
+export const loginFromCacheHelper = async (setUser) => {
+	try {
+		const storedUserToken = await SecureStore.getItemAsync('userToken');
+
+		if (!storedUserToken) return;
+
+		const storedUsers = await AsyncStorage.getItem('users');
+		const users = storedUsers ? JSON.parse(storedUsers) : [];
+
+		const storedUser = users.find((user) => user.id === storedUserToken);
+
+		if (storedUser) {
+			delete storedUser.password;
+			setUser(storedUser);
+		}
+	} catch (error) {
+		return;
+	}
+};
+
+export const logoutHelper = async (setUser) => {
+	setUser(null);
+	await SecureStore.deleteItemAsync('userToken');
 };
 
 export const deleteAccountHelper = async (user, setUser) => {
@@ -80,6 +108,7 @@ export const deleteAccountHelper = async (user, setUser) => {
 		await AsyncStorage.setItem('users', JSON.stringify(updatedUsers));
 
 		setUser(null);
+		await SecureStore.deleteItemAsync('userToken');
 	} catch (error) {
 		return 'An error occurred while deleting the account.';
 	}
