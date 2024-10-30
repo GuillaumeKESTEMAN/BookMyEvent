@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Home } from '../../screens/Home';
 import { SignIn } from '../../screens/SignIn';
 import { SignUp } from '../../screens/SignUp';
-import { User } from '../../screens/User';
+import { UserNavigator } from '../../screens/User';
 import { useAppContext } from '../../shared/context/AppContext';
 
 const Tab = createBottomTabNavigator();
@@ -91,8 +91,8 @@ export const Navigator = () => {
 						}}
 					/>
 					<Tab.Screen
-						name="User"
-						component={User}
+						name="Account"
+						component={UserNavigator}
 						options={{
 							tabBarLabel: 'Account',
 							tabBarIcon: ({ color, size }) => {

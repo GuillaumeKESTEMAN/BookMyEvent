@@ -1,5 +1,10 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
-import { createUserHelper, loginHelper, deleteAccountHelper } from './helpers/User.helpers';
+import {
+	createUserHelper,
+	deleteAccountHelper,
+	loginHelper,
+	updateUserHelper,
+} from './helpers/User.helpers';
 
 const AppContext = createContext({ user: null });
 
@@ -8,6 +13,11 @@ export const AppContextProvider = ({ children }) => {
 
 	const createUser = useCallback(
 		async (newUser) => createUserHelper(newUser, setUser),
+		[setUser]
+	);
+
+	const updateUser = useCallback(
+		(updatedUser) => updateUserHelper(updatedUser, setUser),
 		[setUser]
 	);
 
@@ -25,7 +35,16 @@ export const AppContextProvider = ({ children }) => {
 	}, [setUser]);
 
 	return (
-		<AppContext.Provider value={{ user, login, logout, createUser, deleteAccount }}>
+		<AppContext.Provider
+			value={{
+				user,
+				login,
+				logout,
+				createUser,
+				updateUser,
+				deleteAccount,
+			}}
+		>
 			{children}
 		</AppContext.Provider>
 	);

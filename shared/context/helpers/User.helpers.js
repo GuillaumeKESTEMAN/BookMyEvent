@@ -29,9 +29,25 @@ export const createUserHelper = async (newUser, setUser) => {
 	}
 };
 
+export const updateUserHelper = async (updatedUser, setUser) => {
+	try {
+		const users = await getUsers();
+
+		const updatedUsers = users.map((user) =>
+			user.id === updatedUser.id ? updatedUser : user
+		);
+
+		await AsyncStorage.setItem('users', JSON.stringify(updatedUsers));
+
+		setUser(updatedUser);
+	} catch (error) {
+		return 'An error occurred while updating the user.';
+	}
+};
+
 export const loginHelper = async (userName, password, setUser) => {
 	try {
-		const users = getUsers();
+		const users = await getUsers();
 
 		const hashedPassword = await hash(password);
 
