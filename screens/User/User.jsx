@@ -41,7 +41,6 @@ export function User({ navigation }) {
 					style={styles.button}
 					onPress={() => {
 						logout();
-						navigation.navigate('sign-in');
 					}}
 				>
 					Log Out
@@ -55,7 +54,6 @@ export function User({ navigation }) {
 					style={styles.button}
 					onPress={() => {
 						deleteAccount();
-						navigation.navigate('sign-in');
 					}}
 				>
 					Delete Account

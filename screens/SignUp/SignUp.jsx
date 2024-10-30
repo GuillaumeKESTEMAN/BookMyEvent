@@ -19,8 +19,6 @@ export const SignUp = ({ navigation }) => {
 
 		if (userCreationError) {
 			setError(userCreationError);
-		} else {
-			navigation.navigate('home');
 		}
 	};
 
@@ -44,7 +42,7 @@ export const SignUp = ({ navigation }) => {
 					mode="outlined"
 					textColor="#DF621E"
 					style={styles.button}
-					onPress={() => navigation.navigate('sign-in')}
+					onPress={() => navigation.navigate('SignIn')}
 				>
 					Sign In
 				</Button>
