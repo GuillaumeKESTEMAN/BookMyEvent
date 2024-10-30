@@ -44,4 +44,11 @@ export const styles = StyleSheet.create({
 	item: {
 		paddingVertical: 10,
 	},
+    snackbarWrapper: { 
+        position: 'absolute', 
+        bottom: 0,
+        left: 0, 
+        right: 0, 
+        zIndex: 1, 
+    }
 });
