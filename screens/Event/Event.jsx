@@ -1,20 +1,25 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Image, Alert } from 'react-native';
 import { Dialog, Portal, Text, Button } from 'react-native-paper';
 import { styles } from "./Event.styles";
 import { fetchData, getUsernameById, updateEvents, updateUsers, removeEventFromUsers, removeUserFromEvents } from './Event.helpers';
+import { useAppContext } from '../../shared/context/AppContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const Event = ({ route }) => {
     const { event } = route.params;
-    const currentUser = { id: "337a1254-c51c-455b-8898-37ea2e03d245" }; //jeanclaude
+    const { user } = useAppContext();
     const [users, setUsers] = useState([]);
     const [events, setEvents] = useState([]);
     const [booked, setBooked] = useState(false);
     const [visible, setVisible] = useState(false);
 
     const loadData = async () => {
-        await fetchData(setUsers, setEvents);
+        try {
+            await fetchData(setUsers, setEvents);
+        } catch (e) {
+            Alert.alert("Error", "An error occurred while loading the data.");
+        }
     };
 
     useEffect(() => {
@@ -23,9 +28,9 @@ export const Event = ({ route }) => {
 
     useEffect(() => {
         const currentEvent = events.find(evt => evt.id === event.id);
-        const isBooked = currentEvent?.participants.includes(currentUser.id) || false;
+        const isBooked = currentEvent?.participants.includes(user.id) || false;
         setBooked(isBooked);
-    }, [events, event, currentUser.id]);
+    }, [events, event, user.id]);
 
     const creatorName = getUsernameById(event.creator, users);
 
@@ -34,8 +39,8 @@ export const Event = ({ route }) => {
 
     const handleBooking = async () => {
         try {
-            const updatedEvents = updateEvents(events, event.id, currentUser.id);
-            const updatedUsers = updateUsers(users, event.id, currentUser.id);
+            const updatedEvents = updateEvents(events, event.id, user.id);
+            const updatedUsers = updateUsers(users, event.id, user.id);
             const updatedData = { users: updatedUsers, events: updatedEvents };
 
             await AsyncStorage.setItem('data', JSON.stringify(updatedData));
@@ -44,15 +49,15 @@ export const Event = ({ route }) => {
             setUsers(updatedUsers);
             setBooked(true);
         } catch (e) {
-            Alert.alert("Erreur", "Une erreur s'est produite lors de la réservation.");
+            Alert.alert("Error", "An error occurred during the booking.");
         }
     };
 
     const handleCancel = async () => {
         setVisible(false);
         try {
-            const updatedEvents = removeUserFromEvents(events, event.id, currentUser.id);
-            const updatedUsers = removeEventFromUsers(users, event.id, currentUser.id);
+            const updatedEvents = removeUserFromEvents(events, event.id, user.id);
+            const updatedUsers = removeEventFromUsers(users, event.id, user.id);
             const updatedData = { users: updatedUsers, events: updatedEvents };
 
             await AsyncStorage.setItem('data', JSON.stringify(updatedData));
@@ -61,7 +66,7 @@ export const Event = ({ route }) => {
             setUsers(updatedUsers);
             setBooked(false);
         } catch (e) {
-            Alert.alert("Erreur", "Une erreur s'est produite lors de l'annulation.");
+            Alert.alert("Error", "An error occurred during the cancellation.");
         }
     };
 
@@ -75,7 +80,7 @@ export const Event = ({ route }) => {
                 </View>
                 <Text variant="bodyLarge" style={styles.text}>{event.date}</Text>
                 <Text variant="bodyLarge" style={styles.text}>{event.location}</Text>
-                <Text variant="bodyLarge" style={styles.text}>Ajouté par: {creatorName}</Text>
+                <Text variant="bodyLarge" style={styles.text}>Added by: {creatorName}</Text>
                 <View style={styles.buttons}>
                     {booked ? (
                         <>
@@ -84,23 +89,23 @@ export const Event = ({ route }) => {
                                 mode="outlined"
                                 textColor='#DF621E'
                                 onPress={showDialog}>
-                                Annuler
+                                Cancel
                             </Button>
                             <Portal>
                                 <Dialog visible={visible} onDismiss={hideDialog}>
                                     <Dialog.Title>Confirmation</Dialog.Title>
                                     <Dialog.Content>
-                                        <Text>Es-tu sûr de vouloir annuler ta réservation ?</Text>
+                                        <Text>Are you sure you want to cancel your booking?</Text>
                                     </Dialog.Content>
                                     <Dialog.Actions style={styles.dialogButtons}>
-                                        <Button mode="contained" buttonColor="#DF621E" onPress={handleCancel}>Oui</Button>
-                                        <Button mode="outlined" textColor='#DF621E' onPress={hideDialog}>Non</Button>
+                                        <Button mode="contained" buttonColor="#DF621E" onPress={handleCancel}>Yes</Button>
+                                        <Button mode="outlined" textColor='#DF621E' onPress={hideDialog}>No</Button>
                                     </Dialog.Actions>
                                 </Dialog>
                             </Portal>
                         </>
                     ) : (
-                        <Button icon="calendar" mode="contained" buttonColor="#DF621E" onPress={handleBooking}>S'inscrire</Button>
+                        <Button icon="calendar" mode="contained" buttonColor="#DF621E" onPress={handleBooking}>Register</Button>
                     )}
                 </View>
             </View>
