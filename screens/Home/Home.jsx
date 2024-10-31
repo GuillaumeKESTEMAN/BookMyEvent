@@ -1,7 +1,7 @@
 import { useIsFocused } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
-import { IconButton, Snackbar } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
 import { EventClickCard } from '../../shared/components/EventClickCard/EventClickCard';
 import { ScreenView } from '../../shared/components/ScreenView';
 import { fetchEvents } from './Home.helpers';
@@ -9,15 +9,15 @@ import { styles } from './Home.styles';
 
 export const Home = ({ navigation, route }) => {
 	const isFocused = useIsFocused();
-    const [events, setEvents] = useState([]);
-    const [visible, setVisible] = useState(false);
+	const [events, setEvents] = useState([]);
+	const [visible, setVisible] = useState(false);
 
-    useEffect(() => {
-        fetchEvents(setEvents);
-        if (route.params?.message) {
-            setVisible(true);
-        }
-    }, [setEvents, route.params]);
+	useEffect(() => {
+		fetchEvents(setEvents);
+		if (route.params?.message) {
+			setVisible(true);
+		}
+	}, [setEvents, route.params]);
 
 	const handlePressCard = (event) => {
 		navigation.navigate('Event', { event });
@@ -27,23 +27,26 @@ export const Home = ({ navigation, route }) => {
 		<ScreenView style={styles.container}>
 			<View style={styles.header}>
 				<Text style={styles.title}>
-					Bienvenue sur notre appli de réservation. Ne manque aucun
-					évènement en t'inscrivant dès maintenant !
+					Welcome to our booking app. Don't miss any event by
+					registering now!
 				</Text>
-				<Text style={styles.subtitle}>Tu veux inscrire le tiens ?</Text>
+				<Text style={styles.subtitle}>
+					Do you want to register yours?
+				</Text>
 			</View>
 			<View style={styles.addButtonContainer}>
-				<TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate("NewEvent")}>
+				<TouchableOpacity
+					style={styles.addButton}
+					onPress={() => navigation.navigate('NewEvent')}
+				>
 					<IconButton icon="plus-circle-outline" size={30} />
-					<Text style={styles.addButtonText}>
-						Ajoute un nouvel évènement
-					</Text>
+					<Text style={styles.addButtonText}>Adds a new event</Text>
 				</TouchableOpacity>
 			</View>
 			<Text style={styles.category}>Évènements</Text>
 			{events.length === 0 ? (
 				<Text style={styles.noEvents}>
-					Aucun évènement disponible pour le moment.
+					No events available at the moment.
 				</Text>
 			) : (
 				<FlatList

@@ -5,9 +5,6 @@ export const fetchEvents = async (setEvents) => {
 	try {
 		setEvents(await getEvents());
 	} catch (e) {
-		Alert.alert(
-			'Erreur',
-			"Une erreur s'est produite lors du chargement des données."
-		);
+		Alert.alert('Erreur', 'An error occurred while loading the events.');
 	}
 };
