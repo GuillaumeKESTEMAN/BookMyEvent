@@ -1,7 +1,6 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const fetchEvents = async () => {
-    const value = await AsyncStorage.getItem("data");
-    const data = JSON.parse(value);
-    return data.events || [];
+export const getEvents = async () => {
+	const currentUsersList = await AsyncStorage.getItem('events');
+	return currentUsersList ? JSON.parse(currentUsersList) : [];
 };
