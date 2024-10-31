@@ -80,7 +80,7 @@ export const Navigator = () => {
 		<NavigationContainer>
 			{user ? (
 				<Tab.Navigator
-					initialRouteName="Home"
+					initialRouteName="HomeStack"
 					screenOptions={{
 						headerStyle: {
 							backgroundColor: '#2D2A2A',
@@ -148,7 +148,7 @@ export const Navigator = () => {
 							tabBarIcon: ({ color, size }) => {
 								return (
 									<Icon
-										name="account"
+										name="calendar-text"
 										size={size}
 										color={color}
 									/>

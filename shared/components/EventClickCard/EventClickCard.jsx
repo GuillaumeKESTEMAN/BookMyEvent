@@ -1,5 +1,5 @@
-import { Card, IconButton } from "react-native-paper";
-import { View, Text } from "react-native";
+import { Card, IconButton, Text } from "react-native-paper";
+import { View } from "react-native";
 import { styles } from "./EventClickCard.styles"
 
 export const EventClickCard = ({ title, location, date, image, pressAction }) => (
@@ -18,6 +18,7 @@ export const EventClickCard = ({ title, location, date, image, pressAction }) =>
                 <IconButton
                     icon="chevron-right"
                     size={40}
+                    iconColor="#FF9800"
                 />
             }
         />

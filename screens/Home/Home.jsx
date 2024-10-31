@@ -16,6 +16,7 @@ export const Home = ({ navigation, route }) => {
 	useEffect(() => {
 		fetchEvents(setEvents);
 		if (route.params?.message) {
+            setSnackbarMessage(route.params.message)
 			setVisible(true);
 		}
 	}, [isFocused, setEvents, route.params]);
@@ -47,7 +48,7 @@ export const Home = ({ navigation, route }) => {
                     </Button>
                 </View>
                 <Text variant="headlineLarge" style={styles.category}>
-                    Évènements
+                    Events
                 </Text>
                 {events.length === 0 ? (
                     <Text variant="bodyMedium" style={styles.noEvents}>
@@ -89,7 +90,7 @@ export const Home = ({ navigation, route }) => {
                 }}
                 style={styles.snackbarWrapper}
             >
-                <Text>{snackbarMessage}</Text>
+                <Text style={styles.snackMessage}>{snackbarMessage}</Text>
             </Snackbar>
         </>
     );
