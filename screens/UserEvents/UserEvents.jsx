@@ -73,7 +73,7 @@ export const UserEvents = () => {
                             scrollEnabled={false}
                         />
                     ) : (
-                        <Text style={{ color: '#FFEB3B' }}>No events created yet.</Text>
+                        <Text>No events created yet.</Text>
                     )}
                 </View>
                 <ShowMoreButton
