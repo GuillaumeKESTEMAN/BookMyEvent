@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, FlatList, Alert } from 'react-native';
+import { View, FlatList, Alert } from 'react-native';
 import { useAppContext } from '../../shared/context/AppContext';
 import { getUserCreatedPaginatedEventsHelper, getUserSubscribedPaginatedEventsHelper } from './UserEvents.helpers';
-import { Button } from 'react-native-paper';
+import { Button, Text, Card } from 'react-native-paper';
 import { EventClickCard } from '../../shared/components/EventClickCard';
 import { ScreenView } from '../../shared/components/ScreenView';
 import { styles } from './UserEvents.styles';
@@ -15,8 +15,6 @@ const ShowMoreButton = ({ eventsListLength, eventsList, onShowMore }) => {
         <Button
             icon="plus-circle"
             mode="contained"
-            buttonColor="#DF621E"
-            textColor="#000000"
             onPress={onShowMore}
             style={styles.button}
         >
@@ -38,7 +36,7 @@ export const UserEvents = () => {
         try {
             const [createdEvents, createdLength] = await getUserCreatedPaginatedEventsHelper(3, user.id);
             const [subscribedEvents, subscribedLength] = await getUserSubscribedPaginatedEventsHelper(3, user.id);
-            
+
             setUserCreatedEvents(createdEvents);
             setUserCreatedEventsLength(createdLength);
             setUserSubscribedEvents(subscribedEvents);
@@ -47,7 +45,7 @@ export const UserEvents = () => {
             Alert.alert("Error", "Error retrieving events.");
         }
     };
-    
+
     useEffect(() => {
         fetchUserEvents();
     }, []);
@@ -60,8 +58,8 @@ export const UserEvents = () => {
                     {userCreatedEvents.length > 0 ? (
                         <FlatList
                             data={userCreatedEvents}
-                            renderItem={({ item }) => {
-                                return (
+                            renderItem={({ item }) => (
+                                <Card style={[styles.item, { backgroundColor: 'transparent' }]}>
                                     <EventClickCard
                                         title={item.title}
                                         location={item.location}
@@ -69,13 +67,13 @@ export const UserEvents = () => {
                                         image={item.image}
                                         pressAction={() => handlePressCard(item)}
                                     />
-                                );
-                            }}
+                                </Card>
+                            )}
                             keyExtractor={item => item.id}
                             scrollEnabled={false}
                         />
                     ) : (
-                        <Text style={{ color: "white" }}>No events created yet.</Text>
+                        <Text style={{ color: '#FFEB3B' }}>No events created yet.</Text>
                     )}
                 </View>
                 <ShowMoreButton
@@ -90,8 +88,8 @@ export const UserEvents = () => {
                     {userSubscribedEvents.length > 0 ? (
                         <FlatList
                             data={userSubscribedEvents}
-                            renderItem={({ item }) => {
-                                return (
+                            renderItem={({ item }) => (
+                                <Card style={[styles.item, { backgroundColor: 'transparent' }]}>
                                     <EventClickCard
                                         title={item.title}
                                         location={item.location}
@@ -99,13 +97,13 @@ export const UserEvents = () => {
                                         image={item.image}
                                         pressAction={() => handlePressCard(item)}
                                     />
-                                );
-                            }}
+                                </Card>
+                            )}
                             keyExtractor={item => item.id}
                             scrollEnabled={false}
                         />
                     ) : (
-                        <Text style={{ color: "white" }}>No events subscribed yet.</Text>
+                        <Text style={{ color: '#FFEB3B' }}>No events subscribed yet.</Text>
                     )}
                 </View>
                 <ShowMoreButton
