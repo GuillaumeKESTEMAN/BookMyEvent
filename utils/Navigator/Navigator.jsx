@@ -47,12 +47,24 @@ const HomeStack = () => (
 		<Stack.Screen
 			name="Event"
 			component={Event}
-			options={{ headerTitle: '' }}
+			options={{ 
+                headerTitle: '',
+                headerStyle: {
+                    backgroundColor: '#212121'
+                },
+                headerTintColor: '#fff'
+            }}
 		/>
         <Stack.Screen
 			name="NewEvent"
 			component={NewEvent}
-			options={{ headerTitle: '' }}
+			options={{ 
+                headerTitle: '' ,
+                headerStyle: {
+                    backgroundColor: '#212121'
+                },
+                headerTintColor: '#fff'
+            }}
 		/>
 	</Stack.Navigator>
 );

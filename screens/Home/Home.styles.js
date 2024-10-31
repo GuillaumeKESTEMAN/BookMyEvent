@@ -7,11 +7,13 @@ export const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	title: {
+        color: '#FFF',
 		fontSize: 16,
 		textAlign: 'center',
 		paddingBottom: 5,
 	},
 	subtitle: {
+        color: '#FFF',
 		fontSize: 16,
 	},
 	addButtonContainer: {
@@ -40,11 +42,18 @@ export const styles = StyleSheet.create({
 	item: {
 		paddingVertical: 5,
 	},
+    noEvents: {
+        color: '#FFF'
+    },
     snackbarWrapper: { 
         position: 'absolute', 
         bottom: 0,
         left: 0, 
         right: 0, 
         zIndex: 1, 
+        backgroundColor: 'white',
+    },
+    snackMessage: {
+        color: '#000'
     }
 });

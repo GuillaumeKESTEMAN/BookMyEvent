@@ -23,14 +23,16 @@ const ShowMoreButton = ({ eventsListLength, eventsList, onShowMore }) => {
     );
 };
 
-export const UserEvents = () => {
+export const UserEvents = ({ navigation }) => {
     const { user } = useAppContext();
     const [userCreatedEvents, setUserCreatedEvents] = useState([]);
     const [userSubscribedEvents, setUserSubscribedEvents] = useState([]);
     const [userCreatedEventsLength, setUserCreatedEventsLength] = useState(0);
     const [userSubscribedEventsLength, setUserSubscribedEventsLength] = useState(0);
 
-    const handlePressCard = (event) => {};
+    const handlePressCard = (event) => {
+        navigation.navigate('Event', { event });
+    };
 
     const fetchUserEvents = async () => {
         try {
@@ -73,7 +75,7 @@ export const UserEvents = () => {
                             scrollEnabled={false}
                         />
                     ) : (
-                        <Text>No events created yet.</Text>
+                        <Text style={{color: '#FFF'}}>No events created yet.</Text>
                     )}
                 </View>
                 <ShowMoreButton
@@ -103,7 +105,7 @@ export const UserEvents = () => {
                             scrollEnabled={false}
                         />
                     ) : (
-                        <Text style={{ color: '#FFEB3B' }}>No events subscribed yet.</Text>
+                        <Text style={{ color: '#FFF' }}>No events subscribed yet.</Text>
                     )}
                 </View>
                 <ShowMoreButton

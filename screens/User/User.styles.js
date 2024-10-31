@@ -32,8 +32,12 @@ export const styles = StyleSheet.create({
 		color: '#000000',
 		backgroundColor: '#000000',
 	},
+    buttonsContainer: {
+        marginTop: 50
+    },
 	button: {
-		margin: 20,
+		marginHorizontal: 20,
+        marginVertical: 5,
 		padding: 5,
 	},
 });
