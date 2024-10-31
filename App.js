@@ -5,6 +5,7 @@ import { name as appName } from './app.json';
 import { AppContextProvider } from './shared/context/AppContext';
 import { initializeData } from './utils/initializeData';
 import { Navigator } from './utils/Navigator';
+import { HalloweenTheme } from './halloweenTheme';
 
 export default function App() {
 	useEffect(() => {
@@ -12,7 +13,7 @@ export default function App() {
 	}, []);
 
 	return (
-		<PaperProvider>
+		<PaperProvider theme={HalloweenTheme}>
 			<AppContextProvider>
 				<Navigator />
 			</AppContextProvider>
