@@ -5,6 +5,7 @@ import React, { useEffect } from 'react';
 import { BottomNavigation } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Event } from '../../screens/Event';
+import { NewEvent } from '../../screens/NewEvent';
 import { Home } from '../../screens/Home';
 import { SignIn } from '../../screens/SignIn';
 import { SignUp } from '../../screens/SignUp';
@@ -26,6 +27,11 @@ const HomeStack = () => (
 		<Stack.Screen
 			name="Event"
 			component={Event}
+			options={{ headerTitle: '' }}
+		/>
+        <Stack.Screen
+			name="NewEvent"
+			component={NewEvent}
 			options={{ headerTitle: '' }}
 		/>
 	</Stack.Navigator>
