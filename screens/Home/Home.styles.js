@@ -1,9 +1,6 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-	container: {
-		backgroundColor: '#fff',
-	},
 	header: {
 		paddingVertical: 10,
 		justifyContent: 'center',
@@ -26,7 +23,6 @@ export const styles = StyleSheet.create({
 	addButton: {
 		fontSize: 16,
 		paddingRight: 15,
-		backgroundColor: 'orange',
 		borderRadius: 10,
 		display: 'flex',
 		flexDirection: 'row',
@@ -42,7 +38,7 @@ export const styles = StyleSheet.create({
 		paddingBottom: 10,
 	},
 	item: {
-		paddingVertical: 10,
+		paddingVertical: 5,
 	},
     snackbarWrapper: { 
         position: 'absolute', 
