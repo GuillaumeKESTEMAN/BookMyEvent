@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
 import { BottomNavigation } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Event } from '../../screens/Event';
 import { Home } from '../../screens/Home';
 import { SignIn } from '../../screens/SignIn';
 import { SignUp } from '../../screens/SignUp';
@@ -14,6 +15,21 @@ import { useAppContext } from '../../shared/context/AppContext';
 const Tab = createBottomTabNavigator();
 
 const Stack = createNativeStackNavigator();
+
+const HomeStack = () => (
+	<Stack.Navigator initialRouteName="Home">
+		<Stack.Screen
+			name="Home"
+			component={Home}
+			options={{ headerShown: false }}
+		/>
+		<Stack.Screen
+			name="Event"
+			component={Event}
+			options={{ headerTitle: '' }}
+		/>
+	</Stack.Navigator>
+);
 
 export const Navigator = () => {
 	const { user, loginFromCache } = useAppContext();
@@ -96,8 +112,8 @@ export const Navigator = () => {
 						}}
 					/>
 					<Tab.Screen
-						name="Home"
-						component={Home}
+						name="HomeStack"
+						component={HomeStack}
 						options={{
 							tabBarLabel: 'Home',
 							tabBarIcon: ({ color, size }) => {
