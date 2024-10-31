@@ -2,6 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CommonActions, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
+import { Image, Text, View } from 'react-native';
 import { BottomNavigation } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Event } from '../../screens/Event';
@@ -12,9 +13,28 @@ import { UserNavigator } from '../../screens/User';
 import { UserEvents } from '../../screens/UserEvents';
 import { useAppContext } from '../../shared/context/AppContext';
 
+import { styles } from './Navigator.styles';
+
 const Tab = createBottomTabNavigator();
 
 const Stack = createNativeStackNavigator();
+
+function HeaderComponent(title) {
+	return (
+		<View style={styles.container}>
+			<Image
+				source={require('../../assets/logo.png')}
+				style={styles.img}
+			/>
+
+			<View style={styles.titleContainer}>
+				<Text style={styles.title}>
+					{title}
+				</Text>
+			</View>
+		</View>
+	)
+}
 
 const HomeStack = () => (
 	<Stack.Navigator initialRouteName="Home">
@@ -44,7 +64,14 @@ export const Navigator = () => {
 				<Tab.Navigator
 					initialRouteName="Home"
 					screenOptions={{
-						headerShown: false,
+						headerStyle: {
+							backgroundColor: '#2D2A2A',
+						},
+						headerTintColor: '#fff',
+						headerTitleStyle: {
+							fontWeight: 'bold',
+							textAlign: 'center',
+						},
 					}}
 					tabBar={({ navigation, state, descriptors, insets }) => (
 						<BottomNavigation.Bar
@@ -109,6 +136,7 @@ export const Navigator = () => {
 									/>
 								);
 							},
+							headerTitle: () => HeaderComponent('User Events')
 						}}
 					/>
 					<Tab.Screen
@@ -125,6 +153,7 @@ export const Navigator = () => {
 									/>
 								);
 							},
+							headerTitle: () => HeaderComponent('Home')
 						}}
 					/>
 					<Tab.Screen
@@ -141,6 +170,7 @@ export const Navigator = () => {
 									/>
 								);
 							},
+							headerTitle: () => HeaderComponent('Account')
 						}}
 					/>
 				</Tab.Navigator>
