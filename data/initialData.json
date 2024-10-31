@@ -2,8 +2,8 @@
   "users": [
     {
       "id": "337a1254-c51c-455b-8898-37ea2e03d245",
-      "username": "jeanclaude",
-      "password": "838b3abf49036ad2443f3fe78c6120f816fdf057be2a559d6ee379744de695c6",
+      "name": "jeanclaude",
+      "password": "f18775820879754ededffe39874922e8dd6f978484edcbbffded10f76a5ed469177a75c264ed13b73001f935ff9ca95a90af37a3892ee5492162d72be61246b8",
       "bio": "I am the original user of this App",
       "createdEvents": [
         "12c17260-0b08-4e0a-8ba3-30f0abf7229c"
@@ -14,8 +14,8 @@
     },
     {
       "id": "40a76c03-8f14-425a-993e-971febf33779",
-      "username": "johndoe",
-      "password": "c2713b62c903791bdefc5a6a99df04d4330de491bbc7a0ca6a5007337e4a6028",
+      "name": "johndoe",
+      "password": "cbda1c52153b137c8543bec07a3eccd5a478c73930bbe46167e02abd1faf570bd6651890913a49574c64c70f6924e4075309da7a76b3ae7a94673c47a1086ba5",
       "bio": "I am a new user of this App",
       "createdEvents": [
         "c13d8cb4-29fc-46cd-93f7-a06ef5e20a05"
@@ -48,6 +48,78 @@
       "creator": "40a76c03-8f14-425a-993e-971febf33779",
       "participants": [
         "337a1254-c51c-455b-8898-37ea2e03d245"
+      ]
+    },
+    {
+      "id": "f7b1b3b4-0b08-4e0a-8ba3-30f0abf7229c",
+      "title": "The Medium Event",
+      "image": "https://picsum.photos/400",
+      "description": "This is the medium event of the year",
+      "date": "2024-12-31",
+      "location": "Chicago",
+      "creator": "40a76c03-8f14-425a-993e-971febf33779",
+      "participants": [
+        "337a1254-c51c-455b-8898-37ea2e03d245"
+      ]
+    },
+    {
+      "id": "5abe1fd5-e8e6-488b-9f78-52f8fcef0eef",
+      "title": "The Nice Event",
+      "image": "https://picsum.photos/400",
+      "description": "This is the nicest event of the year",
+      "date": "2024-12-31",
+      "location": "Boston",
+      "creator": "40a76c03-8f14-425a-993e-971febf33779",
+      "participants": [
+        "337a1254-c51c-455b-8898-37ea2e03d245"
+      ]
+    },
+    {
+      "id": "b9faf840-73e0-4990-9407-785683d62da8",
+      "title": "The Cool Event",
+      "image": "https://picsum.photos/400",
+      "description": "This is the coolest event of the year",
+      "date": "2024-12-31",
+      "location": "Miami",
+      "creator": "40a76c03-8f14-425a-993e-971febf33779",
+      "participants": [
+        "337a1254-c51c-455b-8898-37ea2e03d245"
+      ]
+    },
+    {
+      "id": "f7c1b3b4-0b08-4e0a-8ba3-30f0abf7229c",
+      "title": "The Weird Event",
+      "image": "https://picsum.photos/400",
+      "description": "This is the weirdest event of the year",
+      "date": "2024-12-31",
+      "location": "Chicago",
+      "creator": "337a1254-c51c-455b-8898-37ea2e03d245",
+      "participants": [
+        "40a76c03-8f14-425a-993e-971febf33779"
+      ]
+    },
+    {
+      "id": "5abe3fd5-e8e6-488b-9f78-52f8fcef0eef",
+      "title": "The Strange Event",
+      "image": "https://picsum.photos/400",
+      "description": "This is the strangest event of the year",
+      "date": "2024-12-31",
+      "location": "Boston",
+      "creator": "337a1254-c51c-455b-8898-37ea2e03d245",
+      "participants": [
+        "40a76c03-8f14-425a-993e-971febf33779"
+      ]
+    },
+    {
+      "id": "b9jaf840-73e0-4990-9407-785683d62da8",
+      "title": "The Spooky Event",
+      "image": "https://picsum.photos/400",
+      "description": "This is the spookiest event of the year",
+      "date": "2024-12-31",
+      "location": "Miami",
+      "creator": "337a1254-c51c-455b-8898-37ea2e03d245",
+      "participants": [
+        "40a76c03-8f14-425a-993e-971febf33779"
       ]
     }
   ]
