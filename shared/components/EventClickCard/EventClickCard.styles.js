@@ -3,7 +3,8 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     card: {
         paddingLeft: 40,
-        marginTop: 10
+        marginTop: 10,
+        backgroundColor: '#46464c'
     },
     title: {
         paddingLeft: 0
@@ -11,7 +12,7 @@ export const styles = StyleSheet.create({
     subtitle: {
         display: 'flex',
         flexDirection: "row",
-        gap: 10
+        gap: 10,
     },
     photo: {
         width: 73,

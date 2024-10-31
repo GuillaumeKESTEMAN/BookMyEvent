@@ -1,20 +1,22 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-	container: {
-		backgroundColor: '#fff',
-	},
+    container: {
+        paddingBottom: 30
+    },
 	header: {
 		paddingVertical: 10,
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
 	title: {
+        color: '#FFF',
 		fontSize: 16,
 		textAlign: 'center',
 		paddingBottom: 5,
 	},
 	subtitle: {
+        color: '#FFF',
 		fontSize: 16,
 	},
 	addButtonContainer: {
@@ -26,7 +28,6 @@ export const styles = StyleSheet.create({
 	addButton: {
 		fontSize: 16,
 		paddingRight: 15,
-		backgroundColor: 'orange',
 		borderRadius: 10,
 		display: 'flex',
 		flexDirection: 'row',
@@ -42,13 +43,20 @@ export const styles = StyleSheet.create({
 		paddingBottom: 10,
 	},
 	item: {
-		paddingVertical: 10,
+		paddingVertical: 5,
 	},
+    noEvents: {
+        color: '#FFF'
+    },
     snackbarWrapper: { 
         position: 'absolute', 
         bottom: 0,
         left: 0, 
         right: 0, 
         zIndex: 1, 
+        backgroundColor: 'white',
+    },
+    snackMessage: {
+        color: '#000'
     }
 });

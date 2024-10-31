@@ -25,7 +25,7 @@ export const SignUp = ({ navigation }) => {
 
 	return (
 		<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-			<ScreenView parent={ScrollView}>
+			<ScreenView parent={ScrollView} contentContainerStyle={styles.container}>
 				<Image
 					source={require('../../assets/logo.png')}
 					style={styles.img}

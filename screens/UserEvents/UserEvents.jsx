@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, FlatList, Alert } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
+import { View, FlatList } from 'react-native';
 import { useAppContext } from '../../shared/context/AppContext';
 import { getUserCreatedPaginatedEventsHelper, getUserSubscribedPaginatedEventsHelper } from './UserEvents.helpers';
-import { Button } from 'react-native-paper';
+import { Button, Text, Card } from 'react-native-paper';
 import { EventClickCard } from '../../shared/components/EventClickCard';
 import { ScreenView } from '../../shared/components/ScreenView';
 import { styles } from './UserEvents.styles';
@@ -15,8 +16,6 @@ const ShowMoreButton = ({ eventsListLength, eventsList, onShowMore }) => {
         <Button
             icon="plus-circle"
             mode="contained"
-            buttonColor="#DF621E"
-            textColor="#000000"
             onPress={onShowMore}
             style={styles.button}
         >
@@ -25,32 +24,34 @@ const ShowMoreButton = ({ eventsListLength, eventsList, onShowMore }) => {
     );
 };
 
-export const UserEvents = () => {
+export const UserEvents = ({ navigation }) => {
     const { user } = useAppContext();
+    const isFocused = useIsFocused();
     const [userCreatedEvents, setUserCreatedEvents] = useState([]);
     const [userSubscribedEvents, setUserSubscribedEvents] = useState([]);
     const [userCreatedEventsLength, setUserCreatedEventsLength] = useState(0);
     const [userSubscribedEventsLength, setUserSubscribedEventsLength] = useState(0);
 
-    const handlePressCard = (event) => {};
-
-    const fetchUserEvents = async () => {
-        try {
-            const [createdEvents, createdLength] = await getUserCreatedPaginatedEventsHelper(3, user.id);
-            const [subscribedEvents, subscribedLength] = await getUserSubscribedPaginatedEventsHelper(3, user.id);
-            
-            setUserCreatedEvents(createdEvents);
-            setUserCreatedEventsLength(createdLength);
-            setUserSubscribedEvents(subscribedEvents);
-            setUserSubscribedEventsLength(subscribedLength);
-        } catch (e) {
-            Alert.alert("Error", "Error retrieving events.");
-        }
+    const handlePressCard = (event) => {
+        navigation.navigate('Event', { event });
     };
-    
+
+    const getUserCreatedEvents = async (requiredLength) => {
+        const [filteredUserCreatedEvents, length] = await getUserCreatedPaginatedEventsHelper(requiredLength, user.id);
+        setUserCreatedEvents(filteredUserCreatedEvents);
+        setUserCreatedEventsLength(length);
+    }
+
+    const getUserSubscribedEvents = async (requiredLength) => {
+        const [filteredUserSubscribedEvents, length] = await getUserSubscribedPaginatedEventsHelper(requiredLength, user.id);
+        setUserSubscribedEvents(filteredUserSubscribedEvents);
+        setUserSubscribedEventsLength(length);
+    }
+
     useEffect(() => {
-        fetchUserEvents();
-    }, []);
+        getUserCreatedEvents(3);
+        getUserSubscribedEvents(3);
+    }, [isFocused]);
 
     return (
         <ScreenView>
@@ -60,8 +61,8 @@ export const UserEvents = () => {
                     {userCreatedEvents.length > 0 ? (
                         <FlatList
                             data={userCreatedEvents}
-                            renderItem={({ item }) => {
-                                return (
+                            renderItem={({ item }) => (
+                                <Card style={[styles.item, { backgroundColor: 'transparent' }]}>
                                     <EventClickCard
                                         title={item.title}
                                         location={item.location}
@@ -69,13 +70,13 @@ export const UserEvents = () => {
                                         image={item.image}
                                         pressAction={() => handlePressCard(item)}
                                     />
-                                );
-                            }}
+                                </Card>
+                            )}
                             keyExtractor={item => item.id}
                             scrollEnabled={false}
                         />
                     ) : (
-                        <Text style={{ color: "white" }}>No events created yet.</Text>
+                        <Text style={{ color: '#FFF' }}>No events created yet.</Text>
                     )}
                 </View>
                 <ShowMoreButton
@@ -90,8 +91,8 @@ export const UserEvents = () => {
                     {userSubscribedEvents.length > 0 ? (
                         <FlatList
                             data={userSubscribedEvents}
-                            renderItem={({ item }) => {
-                                return (
+                            renderItem={({ item }) => (
+                                <Card style={[styles.item, { backgroundColor: 'transparent' }]}>
                                     <EventClickCard
                                         title={item.title}
                                         location={item.location}
@@ -99,13 +100,13 @@ export const UserEvents = () => {
                                         image={item.image}
                                         pressAction={() => handlePressCard(item)}
                                     />
-                                );
-                            }}
+                                </Card>
+                            )}
                             keyExtractor={item => item.id}
                             scrollEnabled={false}
                         />
                     ) : (
-                        <Text style={{ color: "white" }}>No events subscribed yet.</Text>
+                        <Text style={{ color: '#FFF' }}>No events subscribed yet.</Text>
                     )}
                 </View>
                 <ShowMoreButton

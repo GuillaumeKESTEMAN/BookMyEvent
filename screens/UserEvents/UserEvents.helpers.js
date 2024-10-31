@@ -1,7 +1,7 @@
-import { fetchEvents } from "../../utils/getEvents";
+import { getEvents } from "../../utils/getEvents";
 
 const getFilteredEvents = async (requiredLength, userId, filterFn) => {
-    const events = await fetchEvents();
+    const events = await getEvents();
     if (!events || events.length === 0) {
         return [[], 0];
     }

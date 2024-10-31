@@ -31,7 +31,7 @@ export const SignIn = ({ navigation }) => {
 
 	return (
 		<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-			<ScreenView>
+			<ScreenView contentContainerStyle={styles.container}>
 				<Image
 					source={require('../../assets/logo.png')}
 					style={styles.img}

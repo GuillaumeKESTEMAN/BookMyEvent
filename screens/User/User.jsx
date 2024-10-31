@@ -1,5 +1,5 @@
-import { Text, View } from 'react-native';
-import { Button, Icon } from 'react-native-paper';
+import { View } from 'react-native';
+import { Button, Icon, Text } from 'react-native-paper';
 import { ScreenView } from '../../shared/components/ScreenView';
 import { useAppContext } from '../../shared/context/AppContext';
 import { styles } from './User.styles';
@@ -20,7 +20,7 @@ export function User({ navigation }) {
 				<Text style={styles.userBio}>{user.bio}</Text>
 			</View>
 
-			<View style={styles.secondLevelContainer}>
+			<View style={styles.buttonsContainer}>
 				<Button
 					icon="information"
 					mode="contained"
