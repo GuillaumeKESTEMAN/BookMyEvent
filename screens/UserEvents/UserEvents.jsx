@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useIsFocused } from '@react-navigation/native';
 import { View, FlatList, Alert } from 'react-native';
 import { useAppContext } from '../../shared/context/AppContext';
 import { getUserCreatedPaginatedEventsHelper, getUserSubscribedPaginatedEventsHelper } from './UserEvents.helpers';
@@ -25,6 +26,7 @@ const ShowMoreButton = ({ eventsListLength, eventsList, onShowMore }) => {
 
 export const UserEvents = ({ navigation }) => {
     const { user } = useAppContext();
+    const isFocused = useIsFocused();
     const [userCreatedEvents, setUserCreatedEvents] = useState([]);
     const [userSubscribedEvents, setUserSubscribedEvents] = useState([]);
     const [userCreatedEventsLength, setUserCreatedEventsLength] = useState(0);
@@ -50,7 +52,7 @@ export const UserEvents = ({ navigation }) => {
 
     useEffect(() => {
         fetchUserEvents();
-    }, []);
+    }, [isFocused]);
 
     return (
         <ScreenView>

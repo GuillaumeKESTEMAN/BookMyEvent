@@ -13,4 +13,4 @@ export const HalloweenTheme = {
     onBackground: '#FF9800', // Darker yellow for on-background elements
     onSurface: '#FF9800', // Darker yellow for on-surface elements
   },
-};
+}; 
