@@ -3,7 +3,6 @@ Bienvenue sur la doc de BookMyEvent !
 BookMyEvent est une application mobile de gestion d'évènements, permettant la consultation, création et l'inscription à divers évènements créés par les utilisateurs.
 
 # Les Fonctionnalités
-=====================
 
 ## Création de Compte
 
@@ -34,32 +33,27 @@ Une page Account permet à l'utilisateur d'accéder au récapitulatif de ses inf
 Cet écran permet aussi, via divers boutons, de se déconnecter ou de supprimer son compte.
 
 # La Navigation
-===============
 
 Les pages externes (Sign-In, Sign-Up) sont accessibles à tous les visiteurs non-connectés, et sont gérées via un stack navigator.
 Les pages internes, accessibles aux utilisateurs connectés, sont gérées via un Tab Navigator, un Bottom Nav Bar permet de passer d'une page à l'autre.
 
 # La Gestion des Données
-========================
 
 La gestion des données se fait inMemory à l'aide de l'AsyncStorage, toute la gestion des utilisateurs et des events passe par là, via des setItem et getItem.
 
 L'utilisateur courant est stocké dans un Secure Store d'Expo afin de ne pas avoir beosin de se reconnecter à chaque ouverture de l'application.
 
 # Le Style
-==========
 
 Utilisation de la librairie React Native Paper pour les composants et le style global.
 
 Une [maquette Figma](https://www.figma.com/design/5G8pNkv3YDjO8b7jfnlITw/Untitled?node-id=2-33&node-type=canvas&t=qd9fxmkc5ZyihzcJ-0) a été faite au préalable pour définir le style de l'application.
 
 # Architecture Fichiers
-=======================
 
 Architecture React classique, Screens pour les écrans de l'appli, Assets pour les ressources, Utils pour les fonctions utilitaires, Context pour le contexte global de l'appli, Components pour les composants réutilisables
 
 # Packages Utilisés
-===================
 
 react
 react native
@@ -69,7 +63,6 @@ react native uuid
 expo
 
 # Guide d'exécution local
-=========================
 
 Prérequis: Node.js
 Utilisation: Lancer le projet via npm run start, possibilité d'utiliser Android Studio et son émulateur, ou Expo Go
