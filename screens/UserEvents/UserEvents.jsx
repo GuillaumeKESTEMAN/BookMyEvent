@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useIsFocused } from '@react-navigation/native';
-import { View, FlatList, Alert } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { useAppContext } from '../../shared/context/AppContext';
 import { getUserCreatedPaginatedEventsHelper, getUserSubscribedPaginatedEventsHelper } from './UserEvents.helpers';
 import { Button, Text, Card } from 'react-native-paper';
@@ -36,22 +36,21 @@ export const UserEvents = ({ navigation }) => {
         navigation.navigate('Event', { event });
     };
 
-    const fetchUserEvents = async () => {
-        try {
-            const [createdEvents, createdLength] = await getUserCreatedPaginatedEventsHelper(3, user.id);
-            const [subscribedEvents, subscribedLength] = await getUserSubscribedPaginatedEventsHelper(3, user.id);
+    const getUserCreatedEvents = async (requiredLength) => {
+        const [filteredUserCreatedEvents, length] = await getUserCreatedPaginatedEventsHelper(requiredLength, user.id);
+        setUserCreatedEvents(filteredUserCreatedEvents);
+        setUserCreatedEventsLength(length);
+    }
 
-            setUserCreatedEvents(createdEvents);
-            setUserCreatedEventsLength(createdLength);
-            setUserSubscribedEvents(subscribedEvents);
-            setUserSubscribedEventsLength(subscribedLength);
-        } catch (e) {
-            Alert.alert("Error", "Error retrieving events.");
-        }
-    };
+    const getUserSubscribedEvents = async (requiredLength) => {
+        const [filteredUserSubscribedEvents, length] = await getUserSubscribedPaginatedEventsHelper(requiredLength, user.id);
+        setUserSubscribedEvents(filteredUserSubscribedEvents);
+        setUserSubscribedEventsLength(length);
+    }
 
     useEffect(() => {
-        fetchUserEvents();
+        getUserCreatedEvents(3);
+        getUserSubscribedEvents(3);
     }, [isFocused]);
 
     return (
@@ -77,7 +76,7 @@ export const UserEvents = ({ navigation }) => {
                             scrollEnabled={false}
                         />
                     ) : (
-                        <Text style={{color: '#FFF'}}>No events created yet.</Text>
+                        <Text style={{ color: '#FFF' }}>No events created yet.</Text>
                     )}
                 </View>
                 <ShowMoreButton

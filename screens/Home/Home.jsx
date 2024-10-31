@@ -13,13 +13,13 @@ export const Home = ({ navigation, route }) => {
     const [visible, setVisible] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
 
-	useEffect(() => {
-		fetchEvents(setEvents);
-		if (route.params?.message) {
+    useEffect(() => {
+        fetchEvents(setEvents);
+        if (route.params?.message) {
             setSnackbarMessage(route.params.message)
-			setVisible(true);
-		}
-	}, [isFocused, setEvents, route.params]);
+            setVisible(true);
+        }
+    }, [isFocused, setEvents, route.params]);
 
     const handlePressCard = (event) => {
         navigation.navigate('Event', { event });
@@ -27,14 +27,14 @@ export const Home = ({ navigation, route }) => {
 
     return (
         <>
-            <ScreenView style={styles.container}>
+            <ScreenView contentContainerStyle={styles.container}>
                 <View style={styles.header}>
                     <Text variant="titleMedium" style={styles.title}>
                         Welcome to our booking app. Don't miss any event by
                         registering now!
                     </Text>
                     <Text variant="titleMedium" style={styles.subtitle}>
-                        Tu veux inscrire le tiens ?
+                        Do you want to register yours?
                     </Text>
                 </View>
                 <View style={styles.addButtonContainer}>
@@ -85,6 +85,7 @@ export const Home = ({ navigation, route }) => {
                     onPress: () => {
                         setVisible(false);
                         setSnackbarMessage('');
+                        navigation.setParams({})
                     },
                     textColor: '#000'
                 }}
